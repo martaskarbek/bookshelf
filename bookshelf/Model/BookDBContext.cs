@@ -4,8 +4,13 @@ namespace bookshelf.Model
 {
     public class BookDBContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-            options.UseSqlite("Data Source=/tmp/bookshelf.db");
+        /*protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+            options.UseSqlite("Data Source=/tmp/bookshelf.db");*/
+        
+        public BookDBContext(DbContextOptions<BookDBContext> options)
+            : base(options)
+        {
+        }
         
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
