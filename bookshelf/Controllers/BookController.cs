@@ -1,4 +1,20 @@
-$HEADER$namespace $NAMESPACE$
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+namespace bookshelf.Controllers
 {
-  public class $CLASS$ {$END$}
+    [ApiController]
+    [Route("/books")]
+    [FormatFilter]
+    
+    public class BookController : ControllerBase
+    {
+        private readonly ILogger<BookController> _logger;
+
+        public BookController(ILogger<BookController> logger)
+        {
+            _logger = logger;
+        }
+        
+    }
 }
