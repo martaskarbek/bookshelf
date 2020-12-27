@@ -51,8 +51,7 @@ namespace bookshelf.Controllers
                     User = nested.User,
                     Book = nested.Book,
                     Author = author
-                }
-                );
+                });
             return result;
         }
     }
