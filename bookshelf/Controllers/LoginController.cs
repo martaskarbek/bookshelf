@@ -11,10 +11,9 @@ namespace bookshelf.Controllers
     {
         private readonly ILogger<LoginController> _logger;
 
-            public LoginController(ILogger<LoginController> logger)
-            {
-                _logger = logger;
-            }
-    }
+        public LoginController(ILogger<LoginController> logger)
+        {
+            _logger = logger;
+        }
     }
 }
