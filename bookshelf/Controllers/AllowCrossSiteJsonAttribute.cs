@@ -1,4 +1,3 @@
-using System;
 using System.Web.Http.Filters;
 
 public class AllowCrossSiteJsonAttribute : ActionFilterAttribute
