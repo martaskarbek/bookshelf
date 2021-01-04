@@ -18,6 +18,8 @@ namespace bookshelf
 {
     public class Startup
     {
+       // readonly string MyAllowSpecificOrigins = "AllowSpecificOrigin";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,8 +30,19 @@ namespace bookshelf
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                                    {
+                                        builder.WithOrigins("http://localhost:5001/reviews",
+                                                            "http://localhost:5001")
+                                                            .AllowAnyHeader()
+                                                            .AllowAnyMethod();
+                                    });
+            });
             services.AddDbContext<BookDBContext>(opt =>
                 opt.UseSqlite("Data Source=/tmp/bookshelf.db"));
+
             services.AddControllers(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
@@ -53,8 +66,9 @@ namespace bookshelf
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

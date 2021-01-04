@@ -3,13 +3,16 @@ using System.Linq;
 using bookshelf.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 
 namespace bookshelf.Controllers
 {
     [ApiController]
     [Route("/reviews")]
     [FormatFilter]
-    
+
+
+    //[EnableCors("AllowSpecificOrigin")]
     public class ReviewController : ControllerBase
     {
         private readonly ILogger<ReviewController> _logger;
@@ -21,9 +24,12 @@ namespace bookshelf.Controllers
             _context = context;
         }
 
+
         [HttpGet("/reviews")]
+        [Produces("application/json")]
         public IQueryable Get()
         {
+            this.ControllerContext.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin","*");
             var result = _context.Reviews.Join(
                 _context.Users,
                 review => review.User.Id,
