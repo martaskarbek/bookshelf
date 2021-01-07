@@ -11,7 +11,7 @@ namespace bookshelf.Controllers
     [Route("/reviews")]
     [FormatFilter]
 
-
+    [AllowCrossSiteJson]
     //[EnableCors("AllowSpecificOrigin")]
     public class ReviewController : ControllerBase
     {

@@ -1,12 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace bookshelf.Model
 {
     public class BookDBContext : DbContext
     {
-        /*protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-            options.UseSqlite("Data Source=/tmp/bookshelf.db");*/
-        
+        string Path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+            options.UseSqlite(String.Format("Data Source={0}/bookshelf.db"), Path);
+
         public BookDBContext(DbContextOptions<BookDBContext> options)
             : base(options)
         {
@@ -20,6 +23,6 @@ namespace bookshelf.Model
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMessage> Messages { get; set; }
         public DbSet<ChatUser> ChatUsers { get; set; }
-        public DbSet<BookUser> BookUsers { get; set; }
+        public DbSet<BookUser> BookUsers { get; set; }    
     }
 }
